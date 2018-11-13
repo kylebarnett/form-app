@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import FormUserDetails from './FormUserDetails';
+import FormPersonalDetails from './FormPersonalDetails';
 
 class UserForm extends Component {
   constructor(props) {
-    super(props);
+    super();
     this.state = {
       step: 1,
       firstName: '',
@@ -32,7 +33,7 @@ class UserForm extends Component {
   //handled fields change
   handleChange = input => e => {
     this.setState({
-      [input]: e.targer.value
+      [input]: e.target.value
     })
   }
   render() {
@@ -51,7 +52,12 @@ class UserForm extends Component {
         )
       case 2:
         return (
-          <h1>FormPersonalDetails</h1>
+          <FormPersonalDetails 
+            nextStep={this.nextStep}
+            prevStep={this.prevStep}
+            handleChange={this.handleChange}
+            values={values}
+          />
         )
       case 3:
         return (
