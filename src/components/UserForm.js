@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import FormUserDetails from './FormUserDetails';
 import FormPersonalDetails from './FormPersonalDetails';
+import Confirm from './Confirm';
+import Success from './Success';
 
 class UserForm extends Component {
   constructor(props) {
@@ -17,14 +19,14 @@ class UserForm extends Component {
   }
   //proceed to next step
   nextStep = () => {
-    const {step} = this.state
+    const { step } = this.state
     this.setState({
       step: step + 1
     })
   }
   //go back to previous step
   prevStep = () => {
-    const {step} = this.state
+    const { step } = this.state
     this.setState({
       step: step - 1
     })
@@ -37,14 +39,14 @@ class UserForm extends Component {
     })
   }
   render() {
-    const {step} = this.state
-    const {firstName, lastName, email, occupation, city, bio} = this.state
-    const values = {firstName, lastName, email, occupation, city, bio}
+    const { step } = this.state
+    const { firstName, lastName, email, occupation, city, bio } = this.state
+    const values = { firstName, lastName, email, occupation, city, bio }
 
-    switch(step){
-      case 1: 
+    switch (step) {
+      case 1:
         return (
-          <FormUserDetails 
+          <FormUserDetails
             nextStep={this.nextStep}
             handleChange={this.handleChange}
             values={values}
@@ -52,7 +54,7 @@ class UserForm extends Component {
         )
       case 2:
         return (
-          <FormPersonalDetails 
+          <FormPersonalDetails
             nextStep={this.nextStep}
             prevStep={this.prevStep}
             handleChange={this.handleChange}
@@ -61,12 +63,14 @@ class UserForm extends Component {
         )
       case 3:
         return (
-          <h1>Confirm</h1>
+          <Confirm
+            nextStep={this.nextStep}
+            prevStep={this.prevStep}
+            values={values}
+          />
         )
       case 4:
-        return (
-          <h1>Success</h1>
-        )
+        return <Success />
     }
   }
 }
